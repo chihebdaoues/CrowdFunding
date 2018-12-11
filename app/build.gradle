@@ -16,6 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 dependencies {
@@ -41,6 +45,6 @@ dependencies {
     implementation 'com.fatboyindustrial.gson-jodatime-serialisers:gson-jodatime-serialisers:1.2.0'
 
     //Butterknife
-    implementation 'com.jakewharton:butterknife:9.0.0-rc2'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc2'
+    implementation 'com.jakewharton:butterknife:8.0.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.0.1'
 }
