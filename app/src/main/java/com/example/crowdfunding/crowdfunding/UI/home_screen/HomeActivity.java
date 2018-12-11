@@ -2,38 +2,28 @@ package com.example.crowdfunding.crowdfunding.UI.home_screen;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.crowdfunding.crowdfunding.R;
-import com.example.crowdfunding.crowdfunding.data.network.CrowdFundingService;
-import com.example.crowdfunding.crowdfunding.data.network.entities.Collecte;
-import com.example.crowdfunding.crowdfunding.data.network.entities.User;
 
-import java.io.File;
-import java.util.List;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-import okhttp3.Cache;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import timber.log.Timber;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +36,8 @@ public class HomeActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
 
@@ -59,6 +49,18 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+//        rvCollectesHolder.setHasFixedSize(true);
+
+        // use a linear layout manager
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+//        rvCollectesHolder.setLayoutManager(mLayoutManager);
+
+//         specify an adapter (see also next example)
+//        RvAdapter adapter = new RvAdapter(null);
+//        rvCollectesHolder.setAdapter(adapter);
 
 //        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
 //            @Override

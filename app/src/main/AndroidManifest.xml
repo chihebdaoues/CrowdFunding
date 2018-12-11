@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".UI.create_collecte_screen.CreateCollecteActivity"></activity>
     </application>
 
 </manifest>
