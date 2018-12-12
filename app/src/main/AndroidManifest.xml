@@ -23,7 +23,16 @@
         </activity>
         <activity
             android:name=".UI.create_collecte_screen.CreateCollecteActivity"
-            android:parentActivityName=".UI.home_screen.HomeActivity"></activity>
+            android:parentActivityName=".UI.home_screen.HomeActivity" />
+        <activity
+            android:name=".UI.collecte_details_screen.CollecteDetailsActivity"
+            android:label="@string/title_activity_collecte_details"
+            android:parentActivityName=".UI.home_screen.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.crowdfunding.crowdfunding.UI.home_screen.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>

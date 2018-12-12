@@ -30,6 +30,8 @@
         android:layout_margin="@dimen/fab_margin"
         android:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_add_black_24dp"
+        app:fabCustomSize="@dimen/fab_size"
+        app:maxImageSize="@dimen/fab_img_size"
         tools:ignore="VectorDrawableCompat" />
 
 </android.support.design.widget.CoordinatorLayout>

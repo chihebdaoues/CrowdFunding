@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class Don {
     @SerializedName("somme")
     @Expose
-    public Float somme;
+    public Double somme;
     @SerializedName("donneur")
     @Expose
     public User donneur;

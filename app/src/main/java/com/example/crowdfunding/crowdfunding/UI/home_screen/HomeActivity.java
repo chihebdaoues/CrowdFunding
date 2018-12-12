@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,12 +12,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.crowdfunding.crowdfunding.R;
+import com.example.crowdfunding.crowdfunding.UI.collecte_details_screen.CollecteDetailsActivity;
 import com.example.crowdfunding.crowdfunding.UI.create_collecte_screen.CreateCollecteActivity;
+import com.example.crowdfunding.crowdfunding.data.network.entities.Collecte;
+import com.example.crowdfunding.crowdfunding.data.network.entities.Don;
+import com.example.crowdfunding.crowdfunding.data.network.entities.User;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,11 +31,17 @@ import butterknife.ButterKnife;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    @BindView(R.id.my_recycler_view)
+    RecyclerView myRecyclerView;
     private Context context;
+    private ArrayList<Collecte> collectes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        ButterKnife.bind(this);
 
         this.context = this;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -57,15 +67,16 @@ public class HomeActivity extends AppCompatActivity
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-//        rvCollectesHolder.setHasFixedSize(true);
+        myRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-//        rvCollectesHolder.setLayoutManager(mLayoutManager);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        myRecyclerView.setLayoutManager(mLayoutManager);
+        setupData();
 
-//         specify an adapter (see also next example)
-//        RvAdapter adapter = new RvAdapter(null);
-//        rvCollectesHolder.setAdapter(adapter);
+        // specify an adapter (see also next example)
+        RvAdapter adapter = new RvAdapter(collectes, this);
+        myRecyclerView.setAdapter(adapter);
 
 //        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
 //            @Override
@@ -110,6 +121,25 @@ public class HomeActivity extends AppCompatActivity
 //        });
     }
 
+    private void setupData() {
+        collectes = new ArrayList<>();
+        Collecte c1 = new Collecte("/collecte/1", null, "Titre", "le me is here",
+                new User(null, "yyy", "xxx",
+                        new ArrayList<Collecte>(), new ArrayList<Don>(), "/user/1", "xxx@yyy.com"),
+                new ArrayList<Don>(), 152.0);
+        collectes.add(c1);
+        Collecte c2 = new Collecte("/collecte/1", null, "Titre", "le me is here",
+                new User(null, "yyy", "xxx",
+                        new ArrayList<Collecte>(), new ArrayList<Don>(), "/user/1", "xxx@yyy.com"),
+                new ArrayList<Don>(), 152.0);
+        collectes.add(c2);
+        Collecte c3 = new Collecte("/collecte/1", null, "Titre", "le me is here",
+                new User(null, "yyy", "xxx",
+                        new ArrayList<Collecte>(), new ArrayList<Don>(), "/user/1", "xxx@yyy.com"),
+                new ArrayList<Don>(), 152.0);
+        collectes.add(c3);
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -119,8 +149,6 @@ public class HomeActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
-
 
 
     @SuppressWarnings("StatementWithEmptyBody")

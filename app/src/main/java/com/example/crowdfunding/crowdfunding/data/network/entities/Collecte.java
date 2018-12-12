@@ -26,7 +26,17 @@ public class Collecte {
     public List<Don> don_recu;
     @SerializedName("target")
     @Expose
-    public Float target;
+    public Double target;
+
+    public Collecte(String link, String img_src, String title, String description, User creator, List<Don> don_recu, Double target) {
+        this.link = link;
+        this.img_src = img_src;
+        this.title = title;
+        this.description = description;
+        this.creator = creator;
+        this.don_recu = don_recu;
+        this.target = target;
+    }
 
     @Override
     public String toString() {
