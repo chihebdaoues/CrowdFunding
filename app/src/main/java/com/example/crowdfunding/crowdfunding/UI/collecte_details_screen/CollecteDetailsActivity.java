@@ -41,6 +41,8 @@ public class CollecteDetailsActivity extends AppCompatActivity {
     @BindView(R.id.fb_detail_donate_top)
     FloatingActionButton fbDetailDonateTop;
 
+    private Collecte collecte;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +67,11 @@ public class CollecteDetailsActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             pbDetailSommeCollected.getProgressDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary, getTheme()), PorterDuff.Mode.SRC_IN);
         }
-        Collecte collecte = (Collecte) getIntent().getSerializableExtra("collecte");
-        setupUI(collecte);
+        collecte = (Collecte) getIntent().getSerializableExtra("collecte");
+        setupUI();
     }
 
-    private void setupUI(Collecte collecte) {
+    private void setupUI() {
         setTitle(collecte.title);
         tvDetailsCollecteDescription.setText(collecte.description);
         tvDetailSommeCollected.setText("" + 150 + "/" + collecte.target);
@@ -85,7 +87,7 @@ public class CollecteDetailsActivity extends AppCompatActivity {
 
     private void showDonateDialog() {
         FragmentManager fm = getSupportFragmentManager();
-        DonateFragment donateFragment = DonateFragment.newInstance();
+        DonateFragment donateFragment = DonateFragment.newInstance(collecte.id);
         donateFragment.show(fm, "fragment_diag_start");
     }
 }

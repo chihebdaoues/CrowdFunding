@@ -47,7 +47,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Collecte collecte = collectes.get(i);
         viewHolder.tvCardCollecteTitle.setText(collecte.title);
-        viewHolder.tvCardCollecteDescription.setText(collecte.description);
+        viewHolder.tvCardCollecteDescription.setText(collecte.description.substring(0, collecte.description.length() < 300 ? collecte.description.length() : 300));
         viewHolder.clCardCollecte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +61,8 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
                     .downloader(new OkHttp3Downloader(new OkHttpClient()))
                     .build();
             picasso.load("http://i.imgur.com/DvpvklR.png").into(viewHolder.ivCardCollecte);
+        } else {
+            viewHolder.ivCardCollecte.setImageResource(R.drawable.ic_money_bag_with_dollar_symbol);
         }
     }
 

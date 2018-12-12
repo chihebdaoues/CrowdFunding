@@ -11,7 +11,7 @@ public class Don implements Serializable {
     public Long id;
     @SerializedName("somme")
     @Expose
-    public Double somme;
+    public double somme;
     @SerializedName("donneur")
     @Expose
     public User donneur;

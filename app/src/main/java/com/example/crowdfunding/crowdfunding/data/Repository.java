@@ -9,6 +9,7 @@ import android.util.Log;
 import com.example.crowdfunding.crowdfunding.AppExecutors;
 import com.example.crowdfunding.crowdfunding.data.network.CrowdFundingService;
 import com.example.crowdfunding.crowdfunding.data.network.entities.Collecte;
+import com.example.crowdfunding.crowdfunding.data.network.entities.Don;
 
 import java.io.File;
 import java.util.List;
@@ -113,6 +114,25 @@ public class Repository {
                 @Override
                 public void onFailure(Call<List<Collecte>> call, Throwable t) {
                     Log.d("hey", "" + t.getMessage());
+                }
+            });
+        });
+        return data;
+    }
+
+    public LiveData<Don> donnate(long collecte_id, Don don) {
+        MutableLiveData<Don> data = new MutableLiveData<>();
+        executors.networkIO().execute(() -> {
+            service.donate(collecte_id, don).enqueue(new Callback<Don>() {
+                @Override
+                public void onResponse(Call<Don> call, Response<Don> response) {
+                    data.postValue(response.body());
+                    Log.d("hey", "" + response.body());
+                }
+
+                @Override
+                public void onFailure(Call<Don> call, Throwable t) {
+                    Log.d("hey", t.getMessage());
                 }
             });
         });
