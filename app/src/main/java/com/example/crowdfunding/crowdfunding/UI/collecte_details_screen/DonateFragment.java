@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.crowdfunding.crowdfunding.R;
+import com.example.crowdfunding.crowdfunding.data.Repository;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,6 +60,8 @@ public class DonateFragment extends DialogFragment {
 
     @OnClick(R.id.fb_frag_diag_donate)
     public void onViewClicked() {
+        Repository repository = Repository.getInstance(getActivity().getApplicationContext());
+//        repository.donate()
         getFragmentManager().beginTransaction().remove(this).commit();
     }
 }

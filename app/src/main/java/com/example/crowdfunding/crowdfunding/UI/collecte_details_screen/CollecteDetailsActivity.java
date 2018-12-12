@@ -14,9 +14,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.crowdfunding.crowdfunding.R;
+import com.example.crowdfunding.crowdfunding.data.network.entities.Collecte;
+import com.jakewharton.picasso.OkHttp3Downloader;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.OkHttpClient;
 
 public class CollecteDetailsActivity extends AppCompatActivity {
 
@@ -61,8 +65,22 @@ public class CollecteDetailsActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             pbDetailSommeCollected.getProgressDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary, getTheme()), PorterDuff.Mode.SRC_IN);
         }
-        setTitle("collecte A");
+        Collecte collecte = (Collecte) getIntent().getSerializableExtra("collecte");
+        setupUI(collecte);
+    }
 
+    private void setupUI(Collecte collecte) {
+        setTitle(collecte.title);
+        tvDetailsCollecteDescription.setText(collecte.description);
+        tvDetailSommeCollected.setText("" + 150 + "/" + collecte.target);
+        tvDetailCreatorEmail.setText(collecte.creator.email);
+        tvDetailCreatorFullName.setText(collecte.creator.first_name + " " + collecte.creator.last_name);
+        if (collecte.img_src != null) {
+            Picasso picasso = new Picasso.Builder(this)
+                    .downloader(new OkHttp3Downloader(new OkHttpClient()))
+                    .build();
+            picasso.load("http://i.imgur.com/DvpvklR.png").into(ivDetailCollecteToolbar);
+        }
     }
 
     private void showDonateDialog() {

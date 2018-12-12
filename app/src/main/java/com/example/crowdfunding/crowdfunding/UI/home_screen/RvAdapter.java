@@ -14,11 +14,14 @@ import android.widget.TextView;
 import com.example.crowdfunding.crowdfunding.R;
 import com.example.crowdfunding.crowdfunding.UI.collecte_details_screen.CollecteDetailsActivity;
 import com.example.crowdfunding.crowdfunding.data.network.entities.Collecte;
+import com.jakewharton.picasso.OkHttp3Downloader;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.OkHttpClient;
 
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
     private List<Collecte> collectes;
@@ -48,12 +51,21 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         viewHolder.clCardCollecte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, CollecteDetailsActivity.class));
+                Intent intent = new Intent(context, CollecteDetailsActivity.class);
+                intent.putExtra("collecte", collecte);
+                context.startActivity(intent);
             }
         });
-//        if (i == collectes.size() - 1) {
-//            viewHolder.clCardCollecte.
-//        }
+        if (collecte.img_src != null) {
+            Picasso picasso = new Picasso.Builder(context)
+                    .downloader(new OkHttp3Downloader(new OkHttpClient()))
+                    .build();
+            picasso.load("http://i.imgur.com/DvpvklR.png").into(viewHolder.ivCardCollecte);
+        }
+    }
+
+    public void swapData(List<Collecte> collectes) {
+        this.collectes = collectes;
     }
 
     @Override

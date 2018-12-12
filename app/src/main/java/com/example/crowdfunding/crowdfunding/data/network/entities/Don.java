@@ -3,7 +3,9 @@ package com.example.crowdfunding.crowdfunding.data.network.entities;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Don {
+import java.io.Serializable;
+
+public class Don implements Serializable {
     @SerializedName("id")
     @Expose
     public Long id;

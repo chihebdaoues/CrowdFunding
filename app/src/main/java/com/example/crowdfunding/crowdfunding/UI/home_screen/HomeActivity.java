@@ -18,11 +18,13 @@ import android.view.View;
 import com.example.crowdfunding.crowdfunding.R;
 import com.example.crowdfunding.crowdfunding.UI.collecte_details_screen.CollecteDetailsActivity;
 import com.example.crowdfunding.crowdfunding.UI.create_collecte_screen.CreateCollecteActivity;
+import com.example.crowdfunding.crowdfunding.data.Repository;
 import com.example.crowdfunding.crowdfunding.data.network.entities.Collecte;
 import com.example.crowdfunding.crowdfunding.data.network.entities.Don;
 import com.example.crowdfunding.crowdfunding.data.network.entities.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,9 +36,11 @@ public class HomeActivity extends AppCompatActivity
 
     @BindView(R.id.my_recycler_view)
     RecyclerView myRecyclerView;
-    private Context context;
-    private ArrayList<Collecte> collectes;
+    private RvAdapter adapter;
 
+    private Context context;
+    private Repository repository;
+    private List<Collecte> collectes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,32 +76,27 @@ public class HomeActivity extends AppCompatActivity
         // use a linear layout manager
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         myRecyclerView.setLayoutManager(mLayoutManager);
-        setupData();
 
         // specify an adapter (see also next example)
-        RvAdapter adapter = new RvAdapter(collectes, this);
+        adapter = new RvAdapter(collectes, this);
         myRecyclerView.setAdapter(adapter);
 
+        repository = Repository.getInstance(this.getApplicationContext());
+        setupData();
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setupData();
     }
 
     private void setupData() {
-        collectes = new ArrayList<>();
-        Collecte c1 = new Collecte("/collecte/1", null, "Titre", "le me is here",
-                new User(null, "yyy", "xxx",
-                        new ArrayList<Collecte>(), new ArrayList<Don>(), "/user/1", "xxx@yyy.com"),
-                new ArrayList<Don>(), 152.0);
-        collectes.add(c1);
-        Collecte c2 = new Collecte("/collecte/1", null, "Titre", "le me is here",
-                new User(null, "yyy", "xxx",
-                        new ArrayList<Collecte>(), new ArrayList<Don>(), "/user/1", "xxx@yyy.com"),
-                new ArrayList<Don>(), 152.0);
-        collectes.add(c2);
-        Collecte c3 = new Collecte("/collecte/1", null, "Titre", "le me is here",
-                new User(null, "yyy", "xxx",
-                        new ArrayList<Collecte>(), new ArrayList<Don>(), "/user/1", "xxx@yyy.com"),
-                new ArrayList<Don>(), 152.0);
-        collectes.add(c3);
+        repository.getAllCollectes().observe(this, collectes -> {
+            this.collectes = collectes;
+            adapter.swapData(collectes);
+            adapter.notifyDataSetChanged();
+        });
     }
 
     @Override
