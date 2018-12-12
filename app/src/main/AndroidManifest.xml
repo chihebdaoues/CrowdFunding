@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.crowdfunding.crowdfunding">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".HomeActivity"
+            android:name=".UI.home_screen.HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -18,6 +20,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".UI.create_collecte_screen.CreateCollecteActivity"
+            android:parentActivityName=".UI.home_screen.HomeActivity" />
+        <activity
+            android:name=".UI.collecte_details_screen.CollecteDetailsActivity"
+            android:label="@string/title_activity_collecte_details"
+            android:parentActivityName=".UI.home_screen.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.crowdfunding.crowdfunding.UI.home_screen.HomeActivity" />
         </activity>
     </application>
 
