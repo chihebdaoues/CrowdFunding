@@ -4,6 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Don {
+    @SerializedName("id")
+    @Expose
+    public Long id;
     @SerializedName("somme")
     @Expose
     public Double somme;

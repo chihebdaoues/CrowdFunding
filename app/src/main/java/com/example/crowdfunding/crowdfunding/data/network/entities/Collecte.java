@@ -6,6 +6,9 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Collecte {
+    @SerializedName("id")
+    @Expose
+    public Long id;
     @SerializedName("link")
     @Expose
     public String link;
@@ -38,10 +41,15 @@ public class Collecte {
         this.target = target;
     }
 
+    public Collecte() {
+
+    }
+
     @Override
     public String toString() {
         return "Collecte{" +
-                "link='" + link + '\'' +
+                "id='" + id + '\'' +
+                ", link='" + link + '\'' +
                 ", img_src='" + img_src + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +

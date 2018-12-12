@@ -78,47 +78,7 @@ public class HomeActivity extends AppCompatActivity
         RvAdapter adapter = new RvAdapter(collectes, this);
         myRecyclerView.setAdapter(adapter);
 
-//        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-//            @Override
-//            public void log(String message) {
-//                Timber.i(message);
-//            }
-//        });
-//        interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
-//        File cacheFile = new File(this.getCacheDir(), "okhttp_cache");
-//        Cache cache = new Cache(cacheFile, 10 * 1000 * 1000);
-//        OkHttpClient okClient = new OkHttpClient.Builder()
-//                .addInterceptor(interceptor)
-//                .cache(cache)
-//                .build();
-//        CrowdFundingService service = new Retrofit.Builder()
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .client(okClient)
-//                .baseUrl("http://10.0.2.2:6543/")
-//                .build().create(CrowdFundingService.class);
-//        service.getAllCollectes().enqueue(new Callback<List<Collecte>>() {
-//            @Override
-//            public void onResponse(Call<List<Collecte>> call, Response<List<Collecte>> response) {
-//                Log.d("hey", ""+response.body());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Collecte>> call, Throwable t) {
-//                Log.d("hey", ""+t.getMessage());
-//            }
-//        });
-//
-//        service.getCollecteById(1).enqueue(new Callback<Collecte>() {
-//            @Override
-//            public void onResponse(Call<Collecte> call, Response<Collecte> response) {
-//                Log.d("hey", ""+response.body());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Collecte> call, Throwable t) {
-//                Log.d("hey", ""+t.getMessage());
-//            }
-//        });
+
     }
 
     private void setupData() {
